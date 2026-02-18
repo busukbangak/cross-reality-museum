@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>cross-reality-museum</title>
+    <meta name="description" content="cross-reality-museum">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="./main.js"></script>
+
+</head>
+
+<body>
+    <!--scene settings
+    -->
+    <a-scene id="scene" stats light="defaultLightsEnabled: false" loading-screen="dotsColor: coral; backgroundColor: darkslategrey" background="color: #FAFAFA" fog="type: linear; color: #AAA">
+
+        <!-- all assets -->
+        <a-assets>
+
+            <!-- audio -->
+            <!-- Indigo Moon by Daniel Birch https://creativecommons.org/licenses/by-nc/4.0/ -->
+            <audio id="bg-mp3" src="./assets/audio/bg.mp3" preload="auto"></audio>
+            <audio id="listen-mp3" src="./assets/audio/listen.mp3" preload="auto"></audio>
+            <audio id="intro-mp3" src="./assets/audio/intro.mp3" preload="auto"></audio>
+            <audio id="bone1-mp3" src="./assets/audio/bone1.mp3" preload="auto"></audio>
+            <audio id="bone2-mp3" src="./assets/audio/bone2.mp3" preload="auto"></audio>
+            <audio id="bone3-mp3" src="./assets/audio/bone3.mp3" preload="auto"></audio>
+            <audio id="bone4-mp3" src="./assets/audio/bone4.mp3" preload="auto"></audio>
+            <audio id="bone-all-mp3" src="./assets/audio/bone_all.mp3" preload="auto"></audio>
+
+            <!-- room models -->
+            <a-asset-item id="room-obj" src="./assets/models/CR_Museam_Room_Only.obj"></a-asset-item>
+            <a-asset-item id="room-mtl" src="./assets/models/CR_Museam_Room_Only.mtl"></a-asset-item>
+
+            <a-asset-item id="sidewall1-obj" src="./assets/models/SideWall1.obj"></a-asset-item>
+            <a-asset-item id="sidewall1-mtl" src="./assets/models/SideWall1.mtl"></a-asset-item>
+
+            <a-asset-item id="sidewall2-obj" src="./assets/models/SideWall2.obj"></a-asset-item>
+            <a-asset-item id="sidewall2-mtl" src="./assets/models/SideWall2.mtl"></a-asset-item>
+
+            <a-asset-item id="sidewall3-obj" src="./assets/models/SideWall3.obj"></a-asset-item>
+            <a-asset-item id="sidewall3-mtl" src="./assets/models/SideWall3.mtl"></a-asset-item>
+
+            <a-asset-item id="pedestral-obj" src="./assets/models/CR Museam Pedestral.obj"></a-asset-item>
+            <a-asset-item id="pedestral-mtl" src="./assets/models/CR Museam Pedestral.mtl"></a-asset-item>
+
+            <a-asset-item id="waypoint-obj" src="./assets/models/CR Museam Waypoint.obj"></a-asset-item>
+            <a-asset-item id="waypoint-mtl" src="./assets/models/CR_Museam_Waypoint.mtl"></a-asset-item>
+
+            <!-- whale bones -->
+            <a-asset-item id="whale-chest-gltf" src="./assets/models/Urwal_Brustkorb.gltf"></a-asset-item>
+
+            <a-asset-item id="whale-head-obj" src="./assets/models/Urwal_Kopf.obj"></a-asset-item>
+            <a-asset-item id="whale-head-mtl" src="./assets/models/Urwal_Kopf.mtl"></a-asset-item>
+
+            <a-asset-item id="whale-upperjaw-obj" src="./assets/models/Urwal_Oberkiefer.obj"></a-asset-item>
+            <a-asset-item id="whale-upperjaw-mtl" src="./assets/models/Urwal_Oberkiefer.mtl"></a-asset-item>
+
+            <a-asset-item id="whale-underjaw-obj" src="./assets/models/Urwal_Unterkiefer.obj"></a-asset-item>
+            <a-asset-item id="whale-underjaw-mtl" src="./assets/models/Urwal_Unterkiefer.mtl"></a-asset-item>
+
+            <a-asset-item id="whale-backbone-obj" src="./assets/models/Urwal_Wirbelsäule.obj"></a-asset-item>
+            <a-asset-item id="whale-backbone-mtl" src="./assets/models/Urwal_Wirbelsäule.mtl"></a-asset-item>
+
+            <a-asset-item id="whale-left-fin-obj" src="./assets/models/Urwal_Linke_Flosse.obj"></a-asset-item>
+            <a-asset-item id="whale-left-fin-mtl" src="./assets/models/Urwal_Linke_Flosse.mtl"></a-asset-item>
+
+            <a-asset-item id="whale-right-fin-obj" src="./assets/models/Urwal_Rechte_Flosse.obj"></a-asset-item>
+            <a-asset-item id="whale-right-fin-mtl" src="./assets/models/Urwal_Rechte_Flosse.mtl"></a-asset-item>
+
+            <a-asset-item id="whale-flipper-obj" src="./assets/models/Urwal_Schwanz.obj"></a-asset-item>
+            <a-asset-item id="whale-flipper-mtl" src="./assets/models/Urwal_Schwanz.mtl"></a-asset-item>
+
+            <a-asset-item id="egg-obj" src="./assets/models/Cr_Mu_Egg.obj"></a-asset-item>
+            <a-asset-item id="egg-mtl" src="./assets/models/Cr_Mu_Egg.mtl"></a-asset-item>
+        </a-assets>
+
+
+        <!-- player controller -->
+        <a-entity id="player" camera="" look-controls="reverseMouseDrag: true" wasd-controls="acceleration: 200" position="-0.02135567477201146 2.5 -13.389897487559065" rotation="0 -180 0" data-aframe-inspector-original-camera="" scale="">
+            <a-entity animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1" animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1250; from: 1 1 1; to: 0.1 0.1 0.1" animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+                cursor="fuse: true; fuseTimeout: 1250" position="0 0 -0.1" geometry="primitive: ring; radiusInner: 0.001; radiusOuter: 0.002" material="color: slategrey; shader: flat" cursor-status="" raycaster="objects: .clickable">
+            </a-entity>
+        </a-entity>
+
+        <!-- models -->
+        <a-obj-model src="#room-obj" mtl="#room-mtl" scale="0.02 0.02 0.02"></a-obj-model>
+        <a-obj-model src="#painting-obj" mtl="#painting-mtl" scale="0.02 0.02 0.02"></a-obj-model>
+        <a-obj-model src="#pedestral-obj" mtl="#pedestral-mtl" position="0 0.5 0" scale="0.02403 0.02403 0.02403" material="" obj-model="" rotation="0 25.561939071966545 0"></a-obj-model>
+        <a-obj-model src="#sidewall1-obj" mtl="#sidewall1-mtl" scale="0.02 0.02 0.02" material="" obj-model="" position="-4.98912 2 9.54476" rotation="0 -29.999999999999996 0"></a-obj-model>
+        <a-obj-model src="#sidewall2-obj" mtl="#sidewall2-mtl" scale="0.02 0.02 0.02" material="" obj-model="" rotation="0 29.999999999999996 0" position="-5.88694 1.5 -9.01152"></a-obj-model>
+        <a-obj-model src="#sidewall3-obj" mtl="#sidewall3-mtl" scale="0.02 0.02 0.02" material="" obj-model="" rotation="0 90 0" position="10.18248 2 0.09402"></a-obj-model>
+        <a-obj-model src="#egg-obj" mtl="#egg-mtl" scale="0.02 0.02 0.02" material="" obj-model="" position="-13.99074 2.14361 -6.90348" rotation="180 0 0"></a-obj-model>
+
+        <!-- waypoints -->
+        <a-obj-model waypoint="" class="clickable" src="#waypoint-obj" mtl="#waypoint-mtl" position="-0.0601 0 -13.9592" scale="0.03002 0.03002 0.03002" material="" obj-model=""></a-obj-model>
+        <a-obj-model waypoint="" class="clickable" src="#waypoint-obj" mtl="#waypoint-mtl" position="-4.92306 0 -7.49787" scale="0.03002 0.03002 0.03002" material="" obj-model=""></a-obj-model>
+        <a-obj-model waypoint="" class="clickable" src="#waypoint-obj" mtl="#waypoint-mtl" position="-10.75525 0 -5.61412" scale="0.03002 0.03002 0.03002" material="" obj-model=""></a-obj-model>
+        <a-obj-model waypoint="" class="clickable" src="#waypoint-obj" mtl="#waypoint-mtl" position="-11.74202 0.02868 6.47763" scale="0.03002 0.03002 0.03002" material="" obj-model=""></a-obj-model>
+        <a-obj-model waypoint="" class="clickable" src="#waypoint-obj" mtl="#waypoint-mtl" position="-3.83011 0.02868 7.53944" scale="0.03002 0.03002 0.03002" material="" obj-model=""></a-obj-model>
+        <a-obj-model waypoint="" class="clickable" src="#waypoint-obj" mtl="#waypoint-mtl" position="-0.13388 0.02868 13.58776" scale="0.03002 0.03002 0.03002" material="" obj-model=""></a-obj-model>
+        <a-obj-model waypoint="" class="clickable" src="#waypoint-obj" mtl="#waypoint-mtl" position="11.70862 0.02868 6.77461" scale="0.03002 0.03002 0.03002" material="" obj-model=""></a-obj-model>
+        <a-obj-model waypoint="" class="clickable" src="#waypoint-obj" mtl="#waypoint-mtl" position="7.71432 0.02868 0.04214" scale="0.03002 0.03002 0.03002" material="" obj-model=""></a-obj-model>
+        <a-obj-model waypoint="" class="clickable" src="#waypoint-obj" mtl="#waypoint-mtl" position="11.50224 0.02868 -7.19908" scale="0.03002 0.03002 0.03002" material="" obj-model=""></a-obj-model>
+        <a-obj-model waypoint="" class="clickable" src="#waypoint-obj" mtl="#waypoint-mtl" position="-7.9277 0 -12.2633" scale="0.03002 0.03002 0.03002" material="" obj-model=""></a-obj-model>
+        <a-obj-model waypoint="" class="clickable" src="#waypoint-obj" mtl="#waypoint-mtl" position="-7.02057 0.02868 13.53371" scale="0.03002 0.03002 0.03002" material="" obj-model=""></a-obj-model>
+        <a-obj-model waypoint="" class="clickable" src="#waypoint-obj" mtl="#waypoint-mtl" position="14.8713 0.02868 0.04214" scale="0.03002 0.03002 0.03002" material="" obj-model=""></a-obj-model>
+
+        <!-- whale bones-->
+        <!-- <a-obj-model whale src="#whale-obj" mtl="#whale-mtl" position="-1 5.5 4" scale="0.4 0.4 0.4"></a-obj-model> -->
+        <a-obj-model start-quest whale id="whale-head-model" class="clickable" xid=0 src="#whale-head-obj" mtl="#whale-head-mtl" position="-2 7 2" scale="0.4 0.4 0.4" visible="true"></a-obj-model>
+        <a-obj-model start-quest whale id="whale-upperjaw-model" class="clickable" xid=0 src="#whale-upperjaw-obj" mtl="#whale-upperjaw-mtl" position="-2 7 2" scale="0.4 0.4 0.4" visible="true"></a-obj-model>
+        <a-obj-model start-quest whale id="whale-underjaw-model" class="clickable" xid=0 src="#whale-underjaw-obj" mtl="#whale-underjaw-mtl" position="-2 7 2" scale="0.4 0.4 0.4" visible="true" rotation="0 0 0"></a-obj-model>
+        <a-gltf-model whale="" id="whale-chest-model" xid="1" src="#whale-chest-gltf" position="-6.33518 2.7292 13.65053" scale="0.4 0.4 0.4" gltf-model="./assets/models/Urwal_Brustkorb.gltf" class="clickable" visible="false"></a-gltf-model>
+        <a-obj-model whale="" id="whale-backbone-model" xid="2" src="#whale-backbone-obj" mtl="#whale-backbone-mtl" position="-7.74312 1.37782 -6.51936" scale="0.4 0.4 0.4" material="" obj-model="" class="clickable" visible="false"></a-obj-model>
+        <a-obj-model whale="" id="whale-left-fin-model" xid="3" src="#whale-left-fin-obj" mtl="#whale-left-fin-mtl" position="-1.7218 2.01322 3.19493" scale="0.4 0.4 0.4" material="" obj-model="" class="clickable" visible="false"></a-obj-model>
+        <a-obj-model whale="" id="whale-right-fin-model" xid="4" src="#whale-right-fin-obj" mtl="#whale-right-fin-mtl" position="-13.42475 2.26762 -6.53528" scale="0.4 0.4 0.4" material="" obj-model="" class="clickable" visible="false"></a-obj-model>
+        <a-obj-model whale="" id="whale-flipper-model" xid="5" src="#whale-flipper-obj" mtl="#whale-flipper-mtl" position="9.99356 1.8156 8.66628" scale="0.4 0.4 0.4" material="" obj-model="" class="clickable" visible="false"></a-obj-model>
+
+        <!--light sources-->
+        <a-entity id="ambient-light" light="type: ambient; intensity: 0.5;"></a-entity>
+        <a-entity id="alight" light="type: point; intensity: 0.1"></a-entity>
+        <!--audio -->
+        <a-sound id="listen-audio" sound="src: #listen-mp3; positional: false" positional="false" loop="true" volume="2" autoplay="true"></a-sound>
+        <a-sound id="intro-audio" sound="src: #intro-mp3; positional: false" positional="false" loop="false" volume="2"></a-sound>
+        <a-sound id="bone1-audio" sound="src: #bone1-mp3; positional: false" positional="false" loop="false" volume="2"></a-sound>
+        <a-sound id="bone2-audio" sound="src: #bone2-mp3; positional: false" positional="false" loop="false" volume="2"></a-sound>
+        <a-sound id="bone3-audio" sound="src: #bone3-mp3; positional: false" positional="false" loop="false" volume="2"></a-sound>
+        <a-sound id="bone4-audio" sound="src: #bone4-mp3; positional: false" positional="false" loop="false" volume="2"></a-sound>
+        <a-sound id="bone-all-audio" sound="src: #bone-all-mp3; positional: false" positional="false" loop="false" volume="2"></a-sound>
+        <a-sound id="bg-audio" sound="src: #bg-mp3; positional: false" positional="false" loop="true" volume="0.05" autoplay="true"></a-sound>
+
+    </a-scene>
+</body>
+
+</html>
